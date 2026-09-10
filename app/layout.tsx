@@ -2,8 +2,9 @@
 import './globals.css';
 export const metadata: Metadata = {
   title: 'Andrés Gómez | Aprende Inteligencia Artificial',
-  description: 'Un espacio para entender la inteligencia artificial y convertir lo que aprendes en proyectos. Los enlaces de Andrés Gómez.',
+  description: 'Aprende IA sin complicarte con Andrés Gómez. Prompts, imágenes, automatización y agentes. De cero a crear con inteligencia artificial.',
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="es"><body>{children}</body></html>;
 }
+
