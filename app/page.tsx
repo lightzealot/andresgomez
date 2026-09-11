@@ -1,6 +1,6 @@
 ﻿'use client';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Mail, Terminal, Code2, Users, ChevronRight } from 'lucide-react';
+import { Mail, Terminal, Code2, Users, ChevronRight } from 'lucide-react';
 
 function InstagramIcon({ size = 19 }: { size?: number }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>;
@@ -68,7 +68,6 @@ const menuItems = [
   { title: 'Comunidad', description: 'Aprende y comparte con otras personas', detail: 'El enlace a la comunidad estará disponible pronto.' },
 ];
 export default function Home() {
-  const [newsletterMessage, setNewsletterMessage] = useState('');
   return <main><NeuralSculpture/>
     <section className="bio" id="inicio" aria-labelledby="bio-title">
       <header className="profile-header">
@@ -83,23 +82,24 @@ export default function Home() {
         <p className="profile-tagline"><span aria-hidden="true">$ </span>aprende(IA) <span className="code-comment">// sin complicarte</span></p>
       </header>
       <nav aria-label="Menú de Andrés Gómez" className="selected-menu">
-        <a className="call-link" href="mailto:andyontrade@proton.me?subject=Agendar%20una%20llamada&body=Hola%20Andr%C3%A9s%2C%20me%20gustar%C3%ADa%20agendar%20una%20llamada%20contigo.%0A%0ATema%3A%20%0ADisponibilidad%3A%20"><Terminal className="menu-symbol" size={18} aria-hidden="true"/><span><span className="link-title">Agenda una llamada conmigo</span><span className="link-description">Empieza aquí</span></span><ArrowUpRight size={24} aria-hidden="true"/></a>
-        {menuItems.map(item => <details className="menu-option" key={item.title}><summary>{item.title === 'Comunidad' ? <Users className="menu-symbol" size={18} aria-hidden="true"/> : <Code2 className="menu-symbol" size={18} aria-hidden="true"/>}<span><span className="link-title">{item.title}</span><span className="link-description">{item.description}</span></span><ChevronRight size={16} aria-hidden="true"/></summary><p>{item.detail}</p></details>)}
+        <div className="call-link unavailable" aria-disabled="true"><Terminal className="menu-symbol" size={18} aria-hidden="true"/><span><span className="link-title">Agenda una llamada conmigo</span><span className="link-description">Sin cupos por el momento</span></span><span className="status-label">Cerrado</span></div>
+        {menuItems.map(item => <details className="menu-option" key={item.title}><summary>{item.title === 'Comunidad' ? <Users className="menu-symbol" size={18} aria-hidden="true"/> : <Code2 className="menu-symbol" size={18} aria-hidden="true"/>}<span><span className="link-title">{item.title}</span><span className="link-description">{item.description}</span></span><ChevronRight size={16} aria-hidden="true"/></summary>{item.title === 'Mis herramientas de IA' ? <div className="tool-grid"><span><span className="brand-fallback codex-mark">&gt;_</span>Codex</span><span><img src="/brands/deepseek.svg" alt=""/>DeepSeek</span><span><img src="/brands/claude.svg" alt=""/>Claude</span><span><img src="/brands/higgsfield.ico" alt=""/>Higgsfield</span></div> : <p>{item.detail}</p>}</details>)}
       </nav>
       <section className="newsletter-card" aria-labelledby="newsletter-title">
         <h3 id="newsletter-title">Newsletter</h3>
         <p>Tutoriales de automatización · IA · agentes de IA. Sin spam.</p>
-        <form onSubmit={event => { event.preventDefault(); setNewsletterMessage('La suscripción todavía no está habilitada. Tu correo no se ha enviado ni guardado.'); }}>
+        <form aria-label="Newsletter próximamente">
           <label className="sr-only" htmlFor="newsletter-email">Tu correo electrónico</label>
-          <input id="newsletter-email" name="email" type="email" placeholder="tu@email.com" autoComplete="email" required aria-describedby={newsletterMessage ? 'newsletter-message' : undefined}/>
-          <button type="submit">Suscribir</button>
+          <input id="newsletter-email" name="email" type="email" placeholder="tu@email.com" disabled/>
+          <button type="button" disabled>Próximamente</button>
         </form>
-        <p id="newsletter-message" className="newsletter-message" role="status">{newsletterMessage}</p>
       </section>
     </section>
     <footer className="footer developer-footer">&lt;Andrés Gómez /&gt;</footer>
   </main>;
 }
+
+
 
 
 
