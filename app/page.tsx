@@ -1,7 +1,10 @@
 ﻿'use client';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Pause, Play } from 'lucide-react';
+import { ArrowUpRight, Mail, Terminal, Code2, Users, ChevronRight } from 'lucide-react';
 
+function InstagramIcon({ size = 19 }: { size?: number }) {
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>;
+}
 function NeuralSculpture() {
   const canvas = useRef<HTMLCanvasElement>(null);
   const rotation = useRef({ x: -.22, y: .4 });
@@ -57,24 +60,56 @@ function NeuralSculpture() {
     }); resize.observe(el);
     return () => { resize.disconnect(); cancelAnimationFrame(frame); };
   }, [paused]);
-  return <><div className="neural-background" aria-hidden="true"><canvas ref={canvas}/></div><button className="motion-toggle" aria-label={paused ? "Animar fondo" : "Pausar fondo"} onClick={() => setPaused(!paused)}>{paused ? <Play size={16}/> : <Pause size={16}/>}<span>{paused ? "Animar fondo" : "Pausar fondo"}</span></button></>;
+  return <div className="neural-background" aria-hidden="true"><canvas ref={canvas}/></div>;
 }
 
-const links = [
-  { title: 'Sígueme en Instagram', description: '@andyontrade', url: 'https://www.instagram.com/andyontrade/', featured: true },
-  { title: 'Hablemos', description: 'andyontrade@proton.me', url: 'mailto:andyontrade@proton.me', featured: false },
+const menuItems = [
+  { title: 'Mis herramientas de IA', description: 'Las que uso y para qué me sirven', detail: 'Próximamente: mi selección de herramientas para crear, aprender y automatizar.' },
+  { title: 'Comunidad', description: 'Aprende y comparte con otras personas', detail: 'El enlace a la comunidad estará disponible pronto.' },
 ];
 export default function Home() {
+  const [newsletterMessage, setNewsletterMessage] = useState('');
   return <main><NeuralSculpture/>
-    <header className="masthead"><a className="monogram" href="#inicio" aria-label="Andrés Gómez, inicio">ag</a><a href="https://www.instagram.com/andyontrade/" target="_blank" rel="noopener noreferrer">@andyontrade <ArrowUpRight size={15}/></a></header>
     <section className="bio" id="inicio" aria-labelledby="bio-title">
-      <p className="creator">Creador digital</p>
-      <h1 id="bio-title">Andrés Gómez</h1>
-      <h2>Aprende IA<br/>sin complicarte.</h2>
-      <p className="topics">Prompts · Imágenes · Automatización · Agentes</p>
-      <p className="description">De cero a crear con inteligencia artificial.</p>
-      <nav aria-label="Enlaces de Andrés Gómez" className="links">{links.map(link => <a key={link.title} className={`bio-link ${link.featured ? 'featured' : ''}`} href={link.url} target={link.url.startsWith('https:') ? '_blank' : undefined} rel={link.url.startsWith('https:') ? 'noopener noreferrer' : undefined}><div><span className="link-title">{link.featured ? 'Aprende conmigo en Instagram' : 'Colaboraciones'}</span><span className="link-description">{link.description}</span></div><ArrowUpRight size={22}/></a>)}</nav>
+      <header className="profile-header">
+        <img className="profile-photo" src="/andy-geek.png" width="104" height="104" alt="Andrés Gómez con gafas, en su espacio de trabajo" fetchPriority="high"/>
+        <h1 id="bio-title">Andrés Gómez</h1>
+        <p className="profile-topics">Prompts · Imágenes · Automatización · Agentes</p>
+        <nav className="social-links" aria-label="Redes y contacto">
+          <a href="https://www.instagram.com/andyontrade/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Andrés Gómez" title="Instagram"><InstagramIcon/></a>
+          <a href="mailto:andyontrade@proton.me" aria-label="Enviar correo a Andrés Gómez" title="Correo"><Mail size={19}/></a>
+        </nav>
+
+        <p className="profile-tagline"><span aria-hidden="true">$ </span>aprende(IA) <span className="code-comment">// sin complicarte</span></p>
+      </header>
+      <nav aria-label="Menú de Andrés Gómez" className="selected-menu">
+        <a className="call-link" href="mailto:andyontrade@proton.me?subject=Agendar%20una%20llamada&body=Hola%20Andr%C3%A9s%2C%20me%20gustar%C3%ADa%20agendar%20una%20llamada%20contigo.%0A%0ATema%3A%20%0ADisponibilidad%3A%20"><Terminal className="menu-symbol" size={18} aria-hidden="true"/><span><span className="link-title">Agenda una llamada conmigo</span><span className="link-description">Empieza aquí</span></span><ArrowUpRight size={24} aria-hidden="true"/></a>
+        {menuItems.map(item => <details className="menu-option" key={item.title}><summary>{item.title === 'Comunidad' ? <Users className="menu-symbol" size={18} aria-hidden="true"/> : <Code2 className="menu-symbol" size={18} aria-hidden="true"/>}<span><span className="link-title">{item.title}</span><span className="link-description">{item.description}</span></span><ChevronRight size={16} aria-hidden="true"/></summary><p>{item.detail}</p></details>)}
+      </nav>
+      <section className="newsletter-card" aria-labelledby="newsletter-title">
+        <h3 id="newsletter-title">Newsletter</h3>
+        <p>Tutoriales de automatización · IA · agentes de IA. Sin spam.</p>
+        <form onSubmit={event => { event.preventDefault(); setNewsletterMessage('La suscripción todavía no está habilitada. Tu correo no se ha enviado ni guardado.'); }}>
+          <label className="sr-only" htmlFor="newsletter-email">Tu correo electrónico</label>
+          <input id="newsletter-email" name="email" type="email" placeholder="tu@email.com" autoComplete="email" required aria-describedby={newsletterMessage ? 'newsletter-message' : undefined}/>
+          <button type="submit">Suscribir</button>
+        </form>
+        <p id="newsletter-message" className="newsletter-message" role="status">{newsletterMessage}</p>
+      </section>
     </section>
-    <footer className="footer"><span>Andrés Gómez</span><span>Aprende Inteligencia Artificial</span></footer>
+    <footer className="footer developer-footer">&lt;Andrés Gómez /&gt;</footer>
   </main>;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
