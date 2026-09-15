@@ -71,15 +71,19 @@ export default function Home() {
   return <main><NeuralSculpture/>
     <section className="bio" id="inicio" aria-labelledby="bio-title">
       <header className="profile-header">
-        <img className="profile-photo" src="/andy%20foto.jpeg" width="112" height="112" alt="Andrés Gómez" fetchPriority="high"/>
-        <h1 id="bio-title">Andrés Gómez</h1>
-        <p className="profile-topics">Prompts · Imágenes · Automatización · Agentes</p>
-        <nav className="social-links" aria-label="Redes y contacto">
-          <a className="social-link instagram-link" href="https://www.instagram.com/andyontrade/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Andrés Gómez" title="Instagram"><InstagramIcon size={21}/></a>
-          <a className="social-link mail-link" href="mailto:andyontrade@proton.me" aria-label="Enviar correo a Andrés Gómez" title="Correo"><Mail size={21}/></a>
-        </nav>
-
-        <p className="profile-tagline"><span aria-hidden="true">$ </span>aprende(IA) <span className="code-comment">// sin complicarte</span></p>
+        <div className="profile-visual">
+          <img className="profile-photo" src="/andy%20foto.jpeg" width="560" height="500" alt="Andrés Gómez" fetchPriority="high"/>
+          <div className="profile-gradient" aria-hidden="true"/>
+          <div className="profile-identity">
+            <h1 id="bio-title">Andrés Gómez</h1>
+            <p className="profile-handle">@andyontrade</p>
+            <nav className="social-links" aria-label="Redes y contacto">
+              <a className="social-link instagram-link" href="https://www.instagram.com/andyontrade/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Andrés Gómez" title="Instagram"><InstagramIcon size={28}/></a>
+              <a className="social-link mail-link" href="mailto:andyontrade@proton.me" aria-label="Enviar correo a Andrés Gómez" title="Correo"><Mail size={27}/></a>
+            </nav>
+          </div>
+        </div>
+        <h2 className="profile-promise"><span>Aprende IA conmigo.</span> Y si tienes una empresa, te ayudo a implementarla.</h2>
       </header>
       <nav aria-label="Menú de Andrés Gómez" className="selected-menu">
         <div className="call-link unavailable" aria-disabled="true"><Terminal className="menu-symbol" size={18} aria-hidden="true"/><span><span className="link-title">Agenda una llamada conmigo</span><span className="link-description">Sin cupos por el momento</span></span><span className="status-label">Cerrado</span></div>
