@@ -47,3 +47,17 @@
 .social-links .mail-link{background:#fff;color:#e17b24;border-color:#fff}
 .social-links .instagram-link:hover{background:radial-gradient(circle at 32% 102%,#ffd600 0 18%,#ff7a00 35%,#ff0169 58%,#d300c5 75%,#7638fa 100%);color:#fff}
 .social-links .mail-link:hover{background:linear-gradient(135deg,#ffca54 0%,#ff714b 48%,#d8328f 100%);color:#fff}
+/* Composición amplia para escritorio; móvil conserva el flujo vertical. */
+@media(min-width:980px){
+  main{max-width:1280px;padding-inline:5%}
+  .bio{width:100%;max-width:1120px;padding:42px 0 38px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(390px,.85fr);grid-template-areas:"profile menu" "profile newsletter";column-gap:clamp(42px,5vw,72px);row-gap:22px;align-items:start}
+  .profile-header{grid-area:profile;margin:0}
+  .profile-visual{min-height:535px;border-radius:28px}
+  .profile-photo{object-position:center 28%}
+  .profile-identity{margin-top:18px}
+  .profile-header .profile-identity h1{font-size:3rem;margin-bottom:16px}
+  .profile-promise{max-width:580px;margin-top:28px;font-size:2.35rem}
+  .selected-menu{grid-area:menu;margin-top:70px}
+  .newsletter-card{grid-area:newsletter;margin-top:0}
+  .developer-footer{width:100%}
+}

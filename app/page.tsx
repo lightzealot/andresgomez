@@ -79,7 +79,7 @@ export default function Home() {
           <h1 id="bio-title">Andrés Gómez</h1>
           <nav className="social-links" aria-label="Redes y contacto">
             <a className="social-link instagram-link" href="https://www.instagram.com/andyontrade/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Andrés Gómez" title="Instagram"><InstagramIcon size={28}/></a>
-            <a className="social-link mail-link" href="mailto:andyontrade@proton.me" aria-label="Enviar correo a Andrés Gómez" title="Correo"><Mail size={27}/></a>
+            <a className="social-link mail-link" href="mailto:hello@andresgomez.store" aria-label="Enviar correo a Andrés Gómez" title="Correo"><Mail size={27}/></a>
           </nav>
         </div>
         <h2 className="profile-promise"><span>Aprende IA conmigo.</span> Y si tienes una empresa, te ayudo a implementarla.</h2>
