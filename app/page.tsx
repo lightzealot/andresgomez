@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useEffect, useRef, useState } from 'react';
 import { Mail, Terminal, Code2, Users, ChevronRight } from 'lucide-react';
 
@@ -71,12 +71,12 @@ export default function Home() {
   return <main><NeuralSculpture/>
     <section className="bio" id="inicio" aria-labelledby="bio-title">
       <header className="profile-header">
-        <img className="profile-photo" src="/andy-geek.png" width="104" height="104" alt="Andrés Gómez con gafas, en su espacio de trabajo" fetchPriority="high"/>
+        <img className="profile-photo" src="/andy%20foto.jpeg" width="112" height="112" alt="Andrés Gómez" fetchPriority="high"/>
         <h1 id="bio-title">Andrés Gómez</h1>
         <p className="profile-topics">Prompts · Imágenes · Automatización · Agentes</p>
         <nav className="social-links" aria-label="Redes y contacto">
-          <a href="https://www.instagram.com/andyontrade/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Andrés Gómez" title="Instagram"><InstagramIcon/></a>
-          <a href="mailto:andyontrade@proton.me" aria-label="Enviar correo a Andrés Gómez" title="Correo"><Mail size={19}/></a>
+          <a className="social-link instagram-link" href="https://www.instagram.com/andyontrade/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Andrés Gómez" title="Instagram"><InstagramIcon size={21}/></a>
+          <a className="social-link mail-link" href="mailto:andyontrade@proton.me" aria-label="Enviar correo a Andrés Gómez" title="Correo"><Mail size={21}/></a>
         </nav>
 
         <p className="profile-tagline"><span aria-hidden="true">$ </span>aprende(IA) <span className="code-comment">// sin complicarte</span></p>
