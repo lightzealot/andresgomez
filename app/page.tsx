@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { Mail, Terminal, Code2, Users, ChevronRight } from 'lucide-react';
+import { Mail, Terminal, Code2, Users, ChevronRight, BookOpen } from 'lucide-react';
 
 function InstagramIcon({ size = 19 }: { size?: number }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>;
@@ -88,6 +88,14 @@ export default function Home() {
         <div className="call-link unavailable" aria-disabled="true"><Terminal className="menu-symbol" size={18} aria-hidden="true"/><span><span className="link-title">Agenda una llamada conmigo</span><span className="link-description">Sin cupos por el momento</span></span><span className="status-label">Cerrado</span></div>
         {menuItems.map(item => <details className="menu-option" key={item.title}><summary>{item.title === 'Comunidad' ? <Users className="menu-symbol" size={18} aria-hidden="true"/> : <Code2 className="menu-symbol" size={18} aria-hidden="true"/>}<span><span className="link-title">{item.title}</span><span className="link-description">{item.description}</span></span><ChevronRight size={16} aria-hidden="true"/></summary>{item.title === 'Mis herramientas de IA' ? <div className="tool-grid"><span><span className="brand-fallback codex-mark">&gt;_</span>Codex</span><span><img src="/brands/deepseek.svg" alt=""/>DeepSeek</span><span><img src="/brands/claude.svg" alt=""/>Claude</span><span><img src="/brands/higgsfield.ico" alt=""/>Higgsfield</span></div> : <p>{item.detail}</p>}</details>)}
       </nav>
+      <a className="free-resources" href="https://andresgomez.store/recursos" target="_blank" rel="noopener noreferrer" aria-labelledby="resources-title">
+        <BookOpen size={22} aria-hidden="true"/>
+        <div>
+          <h3 id="resources-title">Recursos gratuitos</h3>
+          <p>Guías, plantillas y herramientas prácticas para aprender IA paso a paso y aplicarla desde el primer día.</p>
+        </div>
+        <ChevronRight className="resources-arrow" size={19} aria-hidden="true"/>
+      </a>
       <section className="newsletter-card" aria-labelledby="newsletter-title">
         <h3 id="newsletter-title">Newsletter</h3>
         <p>Tutoriales de automatización · IA · agentes de IA. Sin spam.</p>
