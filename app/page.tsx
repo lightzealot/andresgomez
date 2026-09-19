@@ -68,6 +68,29 @@ const menuItems = [
   { title: 'Comunidad', description: 'Aprende y comparte con otras personas', detail: 'El enlace a la comunidad estará disponible pronto.' },
 ];
 export default function Home() {
+  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  async function subscribeToNewsletter(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setNewsletterStatus('submitting');
+    const form = event.currentTarget;
+    const body = new URLSearchParams();
+    new FormData(form).forEach((value, key) => body.append(key, String(value)));
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString(),
+      });
+      if (!response.ok) throw new Error('Newsletter submission failed');
+      form.reset();
+      setNewsletterStatus('success');
+    } catch {
+      setNewsletterStatus('error');
+    }
+  }
+
   return <main><NeuralSculpture/>
     <section className="bio" id="inicio" aria-labelledby="bio-title">
       <header className="profile-header">
@@ -99,11 +122,17 @@ export default function Home() {
       <section className="newsletter-card" aria-labelledby="newsletter-title">
         <h3 id="newsletter-title">Newsletter</h3>
         <p>Tutoriales de automatización · IA · agentes de IA. Sin spam.</p>
-        <form aria-label="Newsletter próximamente">
+        <form name="newsletter" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" aria-label="Suscripción al newsletter" onSubmit={subscribeToNewsletter}>
+          <input type="hidden" name="form-name" value="newsletter"/>
+          <p className="sr-only"><label>No llenes este campo si eres una persona: <input name="bot-field" tabIndex={-1} autoComplete="off"/></label></p>
           <label className="sr-only" htmlFor="newsletter-email">Tu correo electrónico</label>
-          <input id="newsletter-email" name="email" type="email" placeholder="tu@email.com" disabled/>
-          <button type="button" disabled>Próximamente</button>
+          <input id="newsletter-email" name="email" type="email" placeholder="tu@email.com" autoComplete="email" required disabled={newsletterStatus === 'submitting'}/>
+          <button type="submit" disabled={newsletterStatus === 'submitting'}>{newsletterStatus === 'submitting' ? 'Enviando...' : 'Suscribirme'}</button>
         </form>
+        <p className={'newsletter-message ' + newsletterStatus} role="status" aria-live="polite">
+          {newsletterStatus === 'success' && 'Listo. Revisa tu correo para las próximas novedades.'}
+          {newsletterStatus === 'error' && 'No pudimos registrar tu correo. Intenta de nuevo.'}
+        </p>
       </section>
     </section>
     <footer className="footer developer-footer">&lt;Andrés Gómez /&gt;</footer>
