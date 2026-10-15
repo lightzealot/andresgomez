@@ -1,8 +1,9 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import './globals.css';
 export const metadata: Metadata = {
-  title: 'Andrés Gómez | Aprende Inteligencia Artificial',
-  description: 'Aprende IA sin complicarte con Andrés Gómez. Prompts, imágenes, automatización y agentes. De cero a crear con inteligencia artificial.',
+  icons: { icon: '/brands/andres-gomez.png' },
+  title: 'Andrés Gómez — IA y automatización para empresas',
+  description: 'Andrés Gómez: IA aplicada a empresas de servicios. Optimización de procesos para reducir trabajo manual, implementar mejoras y medir resultados.',
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="es"><body>{children}</body></html>;
